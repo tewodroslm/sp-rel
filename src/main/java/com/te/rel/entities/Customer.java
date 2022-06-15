@@ -1,5 +1,7 @@
 package com.te.rel.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.annotation.Generated;
 import javax.persistence.*;
 import java.util.List;
@@ -14,8 +16,11 @@ public class Customer {
     private String email;
     private String gender;
 
-    @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
-    @JoinColumn(name="cp_fk", referencedColumnName = "customerId")
+    @JsonManagedReference
+    @OneToMany(
+            mappedBy = "customer",
+            cascade = CascadeType.ALL
+    )
     private List<Product> productList;
 
 

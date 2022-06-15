@@ -1,7 +1,8 @@
 package com.te.rel.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -12,6 +13,10 @@ public class Product {
     private int qty;
     private int price;
 
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="customerId", referencedColumnName = "customerId")
+    private Customer customer;
 
     public int getProductId() {
         return productId;
@@ -43,5 +48,13 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

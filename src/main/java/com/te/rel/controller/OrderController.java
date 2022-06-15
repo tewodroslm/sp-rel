@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
@@ -74,6 +75,14 @@ public class OrderController {
     @GetMapping("/getCnameProductName")
     public List<String> getCnamePname(){
         return customerRepository.getInformation();
+    }
+
+    @GetMapping("/getCustomerByPname/{pName}")
+    public Customer getCustomer(@PathVariable String pName){
+        logger.info(pName);
+        Customer x = productRepository.getCustomerByProd(pName);
+        logger.info(x.toString());
+        return x;
     }
 
 
