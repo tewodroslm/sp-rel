@@ -1,5 +1,6 @@
 package com.te.rel.controller;
 
+import com.te.rel.dto.CustomerProductResponse;
 import com.te.rel.dto.OrderRequest;
 import com.te.rel.entities.Customer;
 import com.te.rel.repository.CustomerRepository;
@@ -31,8 +32,8 @@ public class OrderController {
     }
 
     @GetMapping("/findAllOrder")
-    public List<Customer> findOrders() {
-        return customerRepository.findAll();
+    public List<CustomerProductResponse> findOrders() {
+        return customerRepository.findAllModified();
     }
 
     @GetMapping("/getByGen/{gen}")

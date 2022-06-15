@@ -1,5 +1,6 @@
 package com.te.rel.repository;
 
+import com.te.rel.dto.CustomerProductResponse;
 import com.te.rel.entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,6 +11,9 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+
+    @Query("SELECT new com.te.rel.dto.CustomerProductResponse(c.name, c.email, c.gender) FROM Customer c")
+    List<CustomerProductResponse> findAllModified();
 
     List<Customer> findByGender(String gen);
 
